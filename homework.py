@@ -71,10 +71,10 @@ class Running(Training):
 
     def get_spent_calories(self) -> float:
         spent_calories = ((self.CALORIES_MEAN_SPEED_MULTIPLIER
-                              * self.get_mean_speed()
-                              + self.CALORIES_MEAN_SPEED_SHIFT) * self.weight
-                              / self.M_IN_KM
-                              * self.duration * self.HR_IN_MIN)
+                          * self.get_mean_speed()
+                          + self.CALORIES_MEAN_SPEED_SHIFT) * self.weight
+                          / self.M_IN_KM
+                          * self.duration * self.HR_IN_MIN)
         return spent_calories
 
 
@@ -91,12 +91,12 @@ class SportsWalking(Training):
 
     def get_spent_calories(self) -> float:
         spent_calories: float = ((self.CALORIES_MEAN_HEIGHT_MULTIPLIER
-                                      * self.weight
-                                      + ((self.get_mean_speed()
-                                       * self.CONST_SKM_HR_IN_M_SEC) ** 2
-                                       / (self.height / self.CONST_SANT_IN_METR))
-                                      * self.CALORIES_MEAN_HEIGHT_SHIFT
-                                      * self.weight) * (self.duration * self.HR_IN_MIN))
+                                 * self.weight
+                                 + ((self.get_mean_speed()
+                                  * self.CONST_SKM_HR_IN_M_SEC) ** 2
+                                  / (self.height / self.CONST_SANT_IN_METR))
+                                 * self.CALORIES_MEAN_HEIGHT_SHIFT
+                                 * self.weight) * (self.duration * self.HR_IN_MIN))
         return spent_calories
 
 
@@ -113,12 +113,12 @@ class Swimming(Training):
 
     def get_mean_speed(self) -> float:
         mean_speed: float = (self.length_pool * self.count_pool
-                                  / self.M_IN_KM / self.duration)
+                             / self.M_IN_KM / self.duration)
         return mean_speed
 
     def get_spent_calories(self) -> float:
         spent_calories = ((self.get_mean_speed() + self.CALORIES_MEAN_SWM)
-                               * self.CONST_SWM * self.weight * self.duration)
+                           * self.CONST_SWM * self.weight * self.duration)
         return spent_calories
 
 
