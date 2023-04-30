@@ -70,12 +70,12 @@ class Running(Training):
         super().__init__(action, duration, weight)
 
     def get_spent_calories(self) -> float:
-        spent_calories_run = ((self.CALORIES_MEAN_SPEED_MULTIPLIER
+        spent_calories = ((self.CALORIES_MEAN_SPEED_MULTIPLIER
                               * self.get_mean_speed()
                               + self.CALORIES_MEAN_SPEED_SHIFT) * self.weight
                               / self.M_IN_KM
                               * self.duration * self.HR_IN_MIN)
-        return spent_calories_run
+        return spent_calories
 
 
 class SportsWalking(Training):
@@ -90,16 +90,14 @@ class SportsWalking(Training):
         self.height = height
 
     def get_spent_calories(self) -> float:
-        spent_calories_walk: float = ((self.CALORIES_MEAN_HEIGHT_MULTIPLIER
-                                       * self.weight
-                                       + ((self.get_mean_speed()
-                                           * self.CONST_SKM_HR_IN_M_SEC) ** 2
-                                           / (self.height
-                                              / self.CONST_SANT_IN_METR))
-                                       * self.CALORIES_MEAN_HEIGHT_SHIFT
-                                       * self.weight)
-                                       * (self.duration * self.HR_IN_MIN))
-        return spent_calories_walk
+        spent_calories: float = ((self.CALORIES_MEAN_HEIGHT_MULTIPLIER
+                                      * self.weight
+                                      + ((self.get_mean_speed()
+                                       * self.CONST_SKM_HR_IN_M_SEC) ** 2
+                                       / (self.height / self.CONST_SANT_IN_METR))
+                                      * self.CALORIES_MEAN_HEIGHT_SHIFT
+                                      * self.weight) * (self.duration * self.HR_IN_MIN))
+        return spent_calories
 
 
 class Swimming(Training):
@@ -114,14 +112,14 @@ class Swimming(Training):
         self.count_pool = count_pool
 
     def get_mean_speed(self) -> float:
-        mean_speed_pool: float = (self.length_pool * self.count_pool
+        mean_speed: float = (self.length_pool * self.count_pool
                                   / self.M_IN_KM / self.duration)
-        return mean_speed_pool
+        return mean_speed
 
     def get_spent_calories(self) -> float:
-        spent_calories_pool = ((self.get_mean_speed() + self.CALORIES_MEAN_SWM)
+        spent_calories = ((self.get_mean_speed() + self.CALORIES_MEAN_SWM)
                                * self.CONST_SWM * self.weight * self.duration)
-        return spent_calories_pool
+        return spent_calories
 
 
 def read_package(workout_type: str, data: list) -> Training:
